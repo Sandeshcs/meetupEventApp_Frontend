@@ -14,15 +14,15 @@ function App() {
   const displayData = data ? (selectedEventType === 'both' || selectedEventType === 'select event type'? data.eventData : data.eventData.filter(event => event.typeOfEvent === selectedEventType)): error && <p>{error}</p>
   //console.log(displayData);
  
-  const handleSearchEventOrTitle = (e) => {
+  const handelSearchEventOrTitle = (e) => {
     setSearchInput(e.target.value);
     const foundSearchData = data? data.eventData.reduce((acc, curr) => {
-      if(curr.title.includes(e.target.value)){
+      if(curr.title === e.target.value){
         acc.push(curr);
       }
       
       const foundTags = curr.eventTags.reduce((inital, tag) => {
-        if(tag.includes(e.target.value)){
+        if(tag ===e.target.value){
           inital.push(curr)
         }
         return inital;
@@ -51,7 +51,7 @@ function App() {
             <h1>Meetup</h1>
           </Link>
           <div className="d-flex justify-content-end">
-            <input type="text" id="searchEventOrTitle" placeholder="search by event title or tags" value={searchInput} onChange={handleSearchEventOrTitle}/>
+            <input type="text" id="searchEventOrTitle" placeholder="search by event title or tags" value={searchInput} onChange={handelSearchEventOrTitle}/>
           </div>
         </nav>
       </header>
